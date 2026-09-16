@@ -23,9 +23,10 @@ jobs:
 
       - name: Configure Astro for GitHub Pages
         run: |
-          echo "ASTRO_SITE=https://${GITHUB_REPOSITORY_OWNER}.github.io" >> "$GITHUB_ENV"
+          owner="${GITHUB_REPOSITORY_OWNER,,}"
+          echo "ASTRO_SITE=https://${owner}.github.io" >> "$GITHUB_ENV"
           repo="${GITHUB_REPOSITORY#*/}"
-          if [ "$repo" != "${GITHUB_REPOSITORY_OWNER}.github.io" ]; then
+          if [ "${repo,,}" != "${owner}.github.io" ]; then
             echo "ASTRO_BASE=/$repo" >> "$GITHUB_ENV"
           fi
 
